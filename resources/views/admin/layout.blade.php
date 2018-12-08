@@ -55,7 +55,6 @@
           <ul>
               
                 <div class="top-left links">
-                        <a class="btn btn-success" href="{{ url('/admin') }}">Home</a>
                 <a class="btn btn-danger" href="{{route('logout')}}" 
                 onclick="event.preventDefault();
                 document.getElementById('logoutform').submit();">Logout</a>
@@ -77,7 +76,7 @@
             </div>
             <div class="pull-left info">
               <p>محمد شریفی</p>
-              <a href="#"><i class="fa fa-circle text-success"></i> آنلاین</a>
+              <a href="#"><i class="fa fa-circle text-success"></i> أونلاين</a>
             </div>
           </div>
           <!-- search form -->
@@ -85,12 +84,50 @@
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
-            <li class="header">ناوبری اصلی</li>
+            <li class="header"></li>
             <li>
-              <a href="#">
-                <i class="fa fa-dashboard"></i> <span>پیشخوان</span>
+            <a href="{{url('/admin')}}">
+                الرئيسية
               </a>
             </li>
+            <li>
+            <a href="{{url('/admin/category')}}">
+                الأقسام
+              </a>
+            </li>
+            <li>
+            <a href="{{url('/admin/aboutus')}}">
+                من نحن
+              </a>
+            </li>
+
+            <li>
+            <a href="{{url('/admin/service')}}">
+                خدماتنا
+              </a>
+            </li>
+            <li>
+            <a href="{{url('/admin/social')}}">
+                سوشيال ميديا
+              </a>
+            </li>
+            <li>
+            <a href="{{url('/admin/customer')}}">
+                عملائنا
+              </a>
+            </li>
+            <li>
+            <a href="{{url('/admin/follower')}}">
+                المتابعين
+              </a>
+            </li> 
+
+            <li>
+            <a href="{{url('/admin/emails')}}">
+                الرسائل المرسلة
+              </a>
+            </li>
+
           </ul>   
         </section>
         <!-- /.sidebar -->
@@ -102,9 +139,13 @@
         
         <!-- Main content -->
         <section class="content">
-         
-            @yield('content')
-            
+         <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-sm-8">
+              @yield('content')
+              </div>
+              </div>
+          </div>
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
       <footer class="main-footer">

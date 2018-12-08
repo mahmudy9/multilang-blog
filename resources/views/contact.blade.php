@@ -17,7 +17,7 @@
             <div class="col-xs-12 col-sm-8">
                 @include('errors')
                 @include('status')
-            <form method="post" action="{{url('/contactus')}}" >
+            <form method="post" action="{{url('/contactus')}}" enctype="multipart/form-data" >
                     @csrf
                     <input type="text" name="name" placeholder="{{__('contact.formname')}}">
             <input type="text" name="activity" placeholder="{{__('contact.formactivity')}}">

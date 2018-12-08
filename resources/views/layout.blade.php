@@ -85,6 +85,15 @@
 
 <body>
 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.2';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <!--===============================
     NAV
 ===================================-->
@@ -138,17 +147,26 @@ Content
 <footer class="navbar-fixed-bottom text-center">
     <div class="container">
 
-        <p>جميع الحقوق محفوظة لمؤسسة صانع الصورة للتجارة  &copy; 2005-2015 </p>
+        <p>{{__('main.footer')}}  &copy; 2005-{{date('Y')}} </p>
 
-        <a href="#"><i class="fa fa-facebook"></i></a>
-        <a href="#"><i class="fa fa-twitter"></i></a>
-        <a href="#"><i class="fa fa-google-plus"></i></a>
-        <a href="#"><i class="fa fa-instagram"></i></a>
-        <a href="#"><i class="fa fa-youtube"></i></a>
-        <a href="#"><i class="fa fa-pinterest"></i></a>
-        <a href="#"><i class="fa fa-behance"></i></a>
-        <a href="#"><i class="fa fa-vimeo"></i></a>
-
+        @if($social['facebook'])
+        <a href="{{$social['facebook']}} "><i class="fa fa-facebook"></i></a>
+        @endif
+        @if($social['twitter'])
+        <a href="{{$social['twitter']}} "><i class="fa fa-twitter"></i></a>
+        @endif
+        @if($social['googleplus'])
+        <a href="{{$social['googleplus']}} "><i class="fa fa-google-plus"></i></a>
+        @endif
+        @if($social['instagram'])
+        <a href="{{$social['instagram']}} "><i class="fa fa-instagram"></i></a>
+        @endif
+        @if($social['youtube'])
+        <a href="{{$social['youtube']}} "><i class="fa fa-youtube"></i></a>
+        @endif
+        @if($social['pinterest'])
+        <a href="{{$social['pinterest']}} "><i class="fa fa-pinterest"></i></a>
+        @endif        
     </div>
 </footer>
 
@@ -163,36 +181,7 @@ Content
 <script type="text/javascript" src="{{asset('image-popup/source/jquery.fancybox.js?v=2.1.5')}}"></script>
 <script type="text/javascript" src="{{asset('image-popup/source/helpers/jquery.fancybox-buttons.js?v=1.0.5')}}"></script>
     <script src="{{asset('tjs/script.js')}}"></script>
-<script>
-    $(document).ready(function (){
-        /*Button helper. Disable animations, hide close button, change title type and content*/
-
-        $('.fancybox-buttons').fancybox({
-            openEffect  : 'none',
-            closeEffect : 'none',
-
-            prevEffect : 'none',
-            nextEffect : 'none',
-
-            closeBtn  : false,
-
-            helpers : {
-                title : {
-                    type : 'inside'
-                },
-                buttons	: {}
-            },
-
-            afterLoad : function() {
-                this.title = '<a href="#" class="btn btn-fb btn-small"><i class="fa fa-facebook right-fa"></i> Share</a>' +
-                        '<a href="#" class="btn btn-tw btn-small"><i class="fa fa-twitter right-fa"></i> Share</a>' +
-                        '<a href="#" class="btn btn-inst btn-small"><i class="fa fa-instagram right-fa"></i> Share</a>';
-            }
-        });
-
-
-    });
-</script>
+    @yield('script')
 <script>
     $(document).ready(function (){
         $('.check-open').slideUp(0);

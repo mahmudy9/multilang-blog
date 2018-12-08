@@ -15,13 +15,13 @@ class CreateSocialsTable extends Migration
     {
         Schema::create('socials', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('facebook');
-            $table->string('twitter');
-            $table->string('googleplus');
-            $table->string('instagram');
-            $table->string('youtube');
-            $table->string('pinterest');
-            $table->tinyInteger('active');
+            $table->string('facebook')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('googleplus')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('youtube')->nullable();
+            $table->string('pinterest')->nullable();
+            $table->tinyInteger('active')->default(0);
             $table->timestamps();
         });
     }

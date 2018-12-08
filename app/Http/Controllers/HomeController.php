@@ -7,6 +7,12 @@ use PDF;
 use Validator;
 use App\Contact;
 use App\Follower;
+use App\About;
+use App\Customer;
+use App\Category;
+use App\Photo;
+use App\Service;
+use App\Http\Resources\GalleryResource;
 
 class HomeController extends Controller
 {
@@ -76,4 +82,49 @@ class HomeController extends Controller
         return \redirect()->back();
     }
 
+
+    public function index()
+    {
+        return view('home');
+    }
+
+
+    public function about()
+    {
+        $about = About::where('active' , 1)->firstOrFail();
+        $customers = Customer::all();
+        return view('about' , compact('about' , 'customers'));
+    }
+
+
+    public function contactus()
+    {
+        return view('contact');
+    }
+
+    public function gallery()
+    {
+        $cats = Category::all();
+        $datas = [];
+        foreach($cats as $cat)
+        {
+            $datas[] = [ 'id' => $cat->id , 'name' => $cat->name , 'photo' => $cat->photos()->first()->photo];
+        }
+        // dd($datas);
+        return view('gallery' , compact('datas'));
+    }
+
+
+    public function services()
+    {
+        $services = Service::all();
+        return view('services' , compact('services'));
+    }
+
+    public function category($id)
+    {
+        $cat = Category::findOrFail($id);
+        $photos = $cat->photos()->get();
+        return view('category' , compact('cat' , 'photos'));
+    }
 }
