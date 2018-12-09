@@ -79,6 +79,10 @@ Route::post('/admin/follower/sendmsg' , 'AdminController@sendmsg');
 Route::get('/admin/email' , 'AdminController@emails');
 Route::get('/admin/email/delete/{id}' , 'AdminController@delete_email');
 Route::delete('/admin/email/destroy' , 'AdminController@destroy_email');
+Route::get('/admin/profile' , 'AdminController@profile');
+Route::put('/admin/profile/update' , 'AdminController@update_profile');
+Route::get('/admin/password' , 'AdminController@password');
+Route::put('/admin/password/update' , 'AdminController@update_password');
 
 Auth::routes();
 

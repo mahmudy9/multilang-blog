@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Email;
 use App\Jobs\SendEmail as Job;
+use App\User;
 
 class AdminController extends Controller
 {
@@ -567,5 +568,66 @@ class AdminController extends Controller
         $email->delete();
         $request->session()->flash('status' , 'email deleted');
         return redirect('/admin/email');
+    }
+
+    public function profile()
+    {
+        $user = User::findOrFail(auth()->user()->id);
+        return view('admin.profile' , compact('user'));
+    }
+
+    public function update_profile(Request $request)
+    {
+        $validator = Validator::make($request->all() , [
+            'name' => 'required|min:3|max:190',
+            'email' => 'required|email|unique:users,email,'.auth()->user()->id,
+            'phone' => 'required|numeric|digits_between:7,12|unique:users,phone,'.auth()->user()->id
+        ]);
+
+        if($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator);
+        }
+        
+        $user = User::find(auth()->user()->id);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->phone = $request->input('phone');
+        $user->save();
+        $request->session()->flash('status' , 'your profile updated');
+        return redirect('/admin/profile');
+    }
+
+    public function password()
+    {
+        return view('admin.password');
+    }
+
+    public function update_password(Request $request)
+    {
+        $validator = Validator::make($request->all() , [
+            'old_password' => 'required',
+            'password' => 'required|min:6|max:190|confirmed'
+        ]);
+        if($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator);
+        }
+        $user = User::findOrFail(auth()->user()->id);
+        if(!Hash::check($request->input('old_password'), $user->password ))
+        {
+            $request->session()->flash('status' , 'old password doesnt match our records');
+            return redirect('/admin/password');
+        }
+
+        if(Hash::check($request->input('password') , $user->password))
+        {
+            $request->session()->flash('status' , 'your password is similar to old one');
+            return redirect('/admin/password');
+        }
+        $user->password = Hash::make($request->input('password'));
+        $user->save();
+        $request->session()->flash('status' , 'Your password has been updated');
+        return redirect('/admin/password');
     }
 }

@@ -123,8 +123,18 @@
             </li> 
 
             <li>
-            <a href="{{url('/admin/emails')}}">
+            <a href="{{url('/admin/email')}}">
                 الرسائل المرسلة
+              </a>
+            </li>
+            <li>
+            <a href="{{url('/admin/profile')}}">
+                تعديل البروفايل
+              </a>
+            </li>
+            <li>
+            <a href="{{url('/admin/password')}}">
+                تعديل الباسوورد
               </a>
             </li>
 

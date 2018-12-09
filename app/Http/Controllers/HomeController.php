@@ -13,6 +13,7 @@ use App\Category;
 use App\Photo;
 use App\Service;
 use App\Http\Resources\GalleryResource;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -99,7 +100,8 @@ class HomeController extends Controller
 
     public function contactus()
     {
-        return view('contact');
+        $user = User::firstOrFail();
+        return view('contact' , compact('user'));
     }
 
     public function gallery()

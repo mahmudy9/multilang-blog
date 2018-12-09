@@ -326,8 +326,8 @@
                 <div class="box black-box text-center">
                     <h3 class="main-heading">{{__('contact.contactdetails')}}</h3>
 
-                    <p><i class="fa fa-envelope-o right-fa"></i> Info@pmstu.com</p>
-                    <p><i class="fa fa-phone right-fa"></i> 0123456789</p>
+                    <p><i class="fa fa-envelope-o right-fa"></i> {{$user->email}} </p>
+                    <p><i class="fa fa-phone right-fa"></i> {{$user->phone}} </p>
                 </div>
                 <div class="box black-box text-center">
                     <h3 class="main-heading">{{__('contact.subscribe')}}</h3>
